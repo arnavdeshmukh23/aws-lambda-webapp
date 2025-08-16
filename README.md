@@ -1,90 +1,86 @@
-# 🌐 Serverless Web Application with AWS Lambda & DynamoDB  
+# 🌐 Serverless Web App on AWS
 
-This project demonstrates building a **completely serverless web application** using **AWS Lambda**, **API Gateway**, and **DynamoDB**, with static frontend hosting on **S3 + CloudFront**. The application scales automatically without managing any servers, providing a cost-efficient and highly available architecture.  
+This project demonstrates deploying a **completely serverless web application** using **AWS Management Console**.
+The app is built with:
 
----
+-   **Frontend** hosted on **S3 + CloudFront**
+-   **API Gateway** as HTTP endpoint
+-   **Lambda** function for business logic
+-   **DynamoDB** for persistent storage
 
-## 📌 Project Overview  
-
-| Task                | Description |
-|---------------------|-------------|
-| ☁️ Compute          | **AWS Lambda** (Node.js/Python functions) |
-| 🔗 API Layer        | **Amazon API Gateway** (REST endpoints) |
-| 🗄️ Database         | **DynamoDB** (NoSQL database for persistence) |
-| 🖼️ Frontend         | Static web hosting on **S3 + CloudFront** |
-| ⚙️ Infrastructure   | Provisioned using **Terraform / SAM** |
-| 🔍 Monitoring       | **CloudWatch** logs & metrics |
+All resources were provisioned directly via the AWS console — **no local coding required.**
 
 ---
 
-## 🛠️ Technologies Used  
+### 📌 Project Overview
 
-- **AWS Lambda** – Serverless compute  
-- **Amazon API Gateway** – REST API endpoints  
-- **Amazon DynamoDB** – Scalable NoSQL database  
-- **Amazon S3** – Static site hosting  
-- **Amazon CloudFront** – CDN for global delivery  
-- **Terraform / AWS SAM** – Infrastructure as Code  
-- **CloudWatch** – Logging and monitoring  
-
----
-
-## 🚀 Architecture  
-
-1. **Frontend**: Static HTML/JS website hosted on **S3 + CloudFront**.  
-2. **API Layer**: **API Gateway** routes client requests to Lambda.  
-3. **Backend Logic**: **AWS Lambda** functions handle business logic.  
-4. **Database**: **DynamoDB** stores and retrieves persistent data.  
-5. **Monitoring**: **CloudWatch** captures logs, metrics, and triggers alerts.  
+| Component | Service Used | Purpose |
+| :--- | :--- | :--- |
+| 🌍 Frontend | S3 + CloudFront | Static HTML hosting + CDN distribution |
+| ⚡ Backend Logic | Lambda | Serverless function triggered via API |
+| 🚪 API Endpoint | API Gateway | Exposes Lambda as RESTful HTTP endpoint |
+| 🗄️ Database | DynamoDB | Stores request data with unique IDs |
+| 🔒 IAM | Roles + Policies | Permissions for Lambda to access DynamoDB |
 
 ---
 
-## 📂 Folder Structure  
+### 🧩 Workflow
 
-serverless-web-app/
-├── backend/               # Lambda function code
-│   ├── handler.js         # Main Lambda handler
-│   ├── package.json       # Dependencies
-│   └── node_modules/      # Installed packages
-├── infrastructure/        # IaC (Terraform / SAM templates)
-│   └── main.tf
-├── api/                   # API Gateway definitions
-│   └── api-gateway.yaml
-├── database/              # DynamoDB schema or seed scripts
-│   └── schema.json
-├── frontend/              # Static website (HTML, CSS, JS)
-│   └── index.html
-├── screenshots/           # Architecture diagrams / test outputs
-├── README.md              # Full project documentation
+1.  User accesses the **frontend** hosted on **S3**, distributed via **CloudFront**.
+2.  Clicking **Call API** triggers a request to **API Gateway**.
+3.  API Gateway invokes the **Lambda function**.
+4.  Lambda writes a unique item into **DynamoDB**.
+5.  Response is sent back and displayed on the webpage.
 
 ---
 
-## 🧩 Workflow  
+### 🛠️ Steps Taken
 
-1. User accesses the **frontend** hosted on **S3 + CloudFront**.  
-2. Requests are sent to **API Gateway**.  
-3. API Gateway triggers the **Lambda** function.  
-4. Lambda queries **DynamoDB** for data persistence.  
-5. Response is sent back to the client.  
-
----
-
-## 💡 Learnings & Outcomes  
-
-- ✅ Designed and deployed a **serverless architecture**  
-- ✅ Automated provisioning with **Infrastructure as Code**  
-- ✅ Connected Lambda with DynamoDB for persistence  
-- ✅ Used CloudFront + S3 for global static hosting  
-- ✅ Learned best practices for **monitoring and logging** with CloudWatch  
+-   **IAM Role** → Created with trust policy for Lambda + DynamoDB + CloudWatch access.
+-   **DynamoDB Table** → Created to store requests with unique IDs.
+-   **Lambda Function** → Deployed inline using Node.js, connected with DynamoDB.
+-   **API Gateway** → Configured as trigger for Lambda with ANY method.
+-   **S3 Bucket** → Hosted static HTML frontend (enabled public access + static website hosting).
+-   **CloudFront** → Added distribution for HTTPS + global access to S3 content.
 
 ---
 
-## 👤 Author  
+### 📸 Screenshots
 
-**Arnav Deshmukh**  
-GitHub: [arnavdeshmukh23](https://github.com/arnavdeshmukh23)  
-LinkedIn: [linkedin.com/in/arnav-deshmukh-7984781bb](https://www.linkedin.com/in/arnav-deshmukh-7984781bb)  
+-   Lambda console with inline code
+-   API Gateway trigger connected to Lambda
+-   Successful test response (Item stored successfully!)
+-   DynamoDB table showing stored records
+-   S3 static website hosting screen
+-   CloudFront distribution settings
+-   Final browser view of the web app
 
 ---
 
-✨ *Star this repo if you found the project helpful or insightful!*  
+### 📆 Folder Structure
+
+serverless-webapp/
+├── screenshots/          # AWS console screenshots
+├── README.md             # Project documentation
+
+---
+
+### 💡 Learnings & Outcomes
+
+-   ✅ Designed and deployed a **serverless architecture** entirely from AWS console
+-   ✅ Integrated **Lambda + DynamoDB** for persistence
+-   ✅ Used **API Gateway** to expose serverless functions
+-   ✅ Hosted and distributed static frontend using **S3 + CloudFront**
+-   ✅ Practiced IAM roles, permissions, and service integrations
+
+---
+
+### 👤 Author
+
+-   Arnav Deshmukh
+-   GitHub: [arnavdeshmukh23](https://github.com/arnavdeshmukh23)
+-   LinkedIn: [linkedin.com/in/arnav-deshmukh-7984781bb](https://www.linkedin.com/in/arnav-deshmukh-7984781bb)
+
+---
+
+⭐ Star this repo if you found the project helpful!
