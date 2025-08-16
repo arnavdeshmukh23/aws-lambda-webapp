@@ -59,30 +59,6 @@ serverless-web-app/
 
 ---
 
-## 🚀 Deployment Steps
-
-### 1️⃣ Create Lambda Function
-- Runtime: Python 3.9
-- Handler: `lambda_function.lambda_handler`
-
-Example:
-```python
-import json
-import boto3
-dynamodb = boto3.resource('dynamodb')
-table = dynamodb.Table('NotesTable')
-
-def lambda_handler(event, context):
-    note_id = event.get('noteId', '1')
-    note_text = event.get('noteText', 'Hello World')
-    table.put_item(Item={'noteId': note_id, 'noteText': note_text})
-    return {
-        'statusCode': 200,
-        'body': json.dumps(f"Note saved: {note_text}")
-    }
-
----
-
 ## 🧩 Workflow  
 
 1. User accesses the **frontend** hosted on **S3 + CloudFront**.  
